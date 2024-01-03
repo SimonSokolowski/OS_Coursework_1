@@ -59,8 +59,8 @@ bool BankersAlgorithm::isSafe()
                     }
                 }
                 if (j == numResources)
-                { // If all resources for p are available
-                    // Add p's allocated resources back to work
+                {
+                    // If all resources for p are available add p's allocated resources back to work
                     for (int k = 0; k < numResources; k++)
                     {
                         work[k] += allocation[p][k];
