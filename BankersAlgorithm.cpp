@@ -14,21 +14,18 @@ BankersAlgorithm::BankersAlgorithm(int P, int R) : numProcesses(P), numResources
 // Function to set the available amount of each resource in the system.
 void BankersAlgorithm::setAvailable(std::vector<int> &avail)
 {
-
     available = avail;
 }
 
 // Function to set the maximum demand of each resource for a specific process.
 void BankersAlgorithm::setMaximum(int processId, std::vector<int> &maxReq)
 {
-
     maximum[processId] = maxReq;
 }
 
 // Function to set the number of resources currently allocated to a specific process.
 void BankersAlgorithm::setAllocation(int processId, std::vector<int> &alloc)
 {
-
     allocation[processId] = alloc;
 }
 
