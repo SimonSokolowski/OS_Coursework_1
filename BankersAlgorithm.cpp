@@ -1,42 +1,45 @@
 #include "BankersAlgorithm.h"
-
 #include <iostream>
 #include <vector>
 
-using namespace std;
-
+// Constructor for the Banker's Algorithm class.
 BankersAlgorithm::BankersAlgorithm(int P, int R) : numProcesses(P), numResources(R)
 {
     processes.resize(P);
     available.resize(R);
-    maximum.resize(P, vector<int>(R));
-    allocation.resize(P, vector<int>(R));
+    maximum.resize(P, std::vector<int>(R));
+    allocation.resize(P, std::vector<int>(R));
 }
 
+// Function to set the available amount of each resource in the system.
 void BankersAlgorithm::setAvailable(std::vector<int> &avail)
 {
 
     available = avail;
 }
 
+// Function to set the maximum demand of each resource for a specific process.
 void BankersAlgorithm::setMaximum(int processId, std::vector<int> &maxReq)
 {
 
     maximum[processId] = maxReq;
 }
 
+// Function to set the number of resources currently allocated to a specific process.
 void BankersAlgorithm::setAllocation(int processId, std::vector<int> &alloc)
 {
 
     allocation[processId] = alloc;
 }
 
+// Function to check if the system is in a safe state.
 bool BankersAlgorithm::isSafe()
 {
 
-    vector<int> work = available;
-    vector<bool> finish(numProcesses, false);
-    vector<int> safeSeq(numProcesses);
+    // Initialize work vector with available resources and a finish vector to track process completion.
+    std::vector<int> work = available;
+    std::vector<bool> finish(numProcesses, false);
+    std::vector<int> safeSeq(numProcesses);
 
     int count = 0;
     while (count < numProcesses)
@@ -70,20 +73,22 @@ bool BankersAlgorithm::isSafe()
         }
         if (!found)
         {
-            cout << "System is not in safe state\n";
+            std::cout << "System is not in safe state\n";
             return false; // No safe sequence found
         }
     }
 
-    cout << "System is in safe state.\nSafe sequence is: ";
+    // If all processes can finish safely, print the safe sequence and return true.
+    std::cout << "System is in safe state.\nSafe sequence is: ";
     for (int i = 0; i < numProcesses; i++)
     {
-        cout << "P" << safeSeq[i] << " ";
+        std::cout << "P" << safeSeq[i] << " ";
     }
-    cout << "\n";
+    std::cout << "\n";
     return true; // Safe sequence found
 }
 
+// Function to handle a request for resources by a process.
 bool BankersAlgorithm::requestResources(int processId, std::vector<int> request)
 {
 
@@ -92,7 +97,7 @@ bool BankersAlgorithm::requestResources(int processId, std::vector<int> request)
     {
         if (request[i] > maximum[processId][i] - allocation[processId][i])
         {
-            cout << "Error: Process has exceeded its maximum claim. ";
+            std::cout << "Error: Process has exceeded its maximum claim. ";
             return false;
         }
     }
@@ -102,7 +107,7 @@ bool BankersAlgorithm::requestResources(int processId, std::vector<int> request)
     {
         if (request[i] > available[i])
         {
-            cout << "Resources are not available. ";
+            std::cout << "Resources are not available. ";
             return false;
         }
     }
@@ -117,7 +122,7 @@ bool BankersAlgorithm::requestResources(int processId, std::vector<int> request)
     // Check if new state is safe
     if (isSafe())
     {
-        cout << "Resources allocated successfully. ";
+        std::cout << "Resources allocated successfully. ";
         return true;
     }
     else
@@ -128,7 +133,7 @@ bool BankersAlgorithm::requestResources(int processId, std::vector<int> request)
             available[i] += request[i];
             allocation[processId][i] -= request[i];
         }
-        cout << "Cannot allocate resources as it leads to an unsafe state. ";
+        std::cout << "Cannot allocate resources as it leads to an unsafe state. ";
         return false;
     }
 }
