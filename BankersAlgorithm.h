@@ -3,6 +3,9 @@
 
 #include <vector>
 
+// Author: Szymon Sokolowski
+// ID: M00948848
+
 class BankersAlgorithm {
 private:
     std::vector<int> processes;

@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 
+// Author: Szymon Sokolowski
+// ID: M00948848
+
 int main()
 {
     int P, R;

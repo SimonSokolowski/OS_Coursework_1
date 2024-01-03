@@ -2,6 +2,9 @@
 #include <iostream>
 #include <vector>
 
+// Author: Szymon Sokolowski
+// ID: M00948848
+
 // Constructor for the Banker's Algorithm class.
 BankersAlgorithm::BankersAlgorithm(int P, int R) : numProcesses(P), numResources(R)
 {
